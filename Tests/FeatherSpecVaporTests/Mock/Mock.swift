@@ -4,8 +4,8 @@
 //
 //  Created by Binary Birds on 2026. 01. 21..
 
-import Vapor
 import OpenAPIRuntime
+import Vapor
 
 /// A test model used to exercise Vapor request/response flows.
 struct Mock: Codable {
@@ -20,7 +20,8 @@ extension Mock: Content {}
 extension Mock {
 
     /// Encodes the mock as a JSON `HTTPBody`.
-    /// Returns an empty body if encoding fails.
+    ///
+    /// - Returns an empty body if encoding fails.
     var httpBody: HTTPBody {
         let encoder = JSONEncoder()
         var buffer = ByteBuffer()
