@@ -1,4 +1,5 @@
 {
+  "originHash" : "8a1d3b2805dd8ee1a32d44df0e4de5def56c330abc5ddfd68577537db83ff98f",
   "pins" : [
     {
       "identity" : "async-http-client",
@@ -25,6 +26,15 @@
       "state" : {
         "revision" : "9f7932f22ab6f64aafadc14491e694179b7d0f6f",
         "version" : "4.14.3"
+      }
+    },
+    {
+      "identity" : "feather-spec",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/feather-framework/feather-spec",
+      "state" : {
+        "revision" : "af3461267e4651928299cf7ab86869f3885d07b2",
+        "version" : "0.4.1"
       }
     },
     {
@@ -262,5 +272,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }
