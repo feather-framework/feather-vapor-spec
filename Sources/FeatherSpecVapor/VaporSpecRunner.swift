@@ -1,17 +1,25 @@
+//
+//  VaporSpecRunner.swift
+//  feather-vapor-spec
+//
+//  Created by Binary Birds on 2026. 01. 21..
+
+import FeatherSpec
 import Vapor
 import XCTVapor
-import FeatherSpec
 
-/// A struct that conforms to the `SpecRunner` protocol and runs specifications using Vapor.
+/// A `SpecRunner` implementation that runs specifications using Vapor.
 ///
-/// This runner initializes with a Vapor application and a testing setup method. It uses the application to perform tests
-/// with a provided block that takes a `SpecExecutor`.
+/// This runner wraps a Vapor `Application` and uses `XCTVapor` to execute requests
+/// against the in-memory or running server during tests.
 public struct VaporSpecRunner: SpecRunner {
 
     /// The Vapor application used for testing.
     private let app: Application
 
     /// The method used for setting up the application during testing.
+    ///
+    /// Use `.inMemory` for fast tests or `.running` for full HTTP server behavior.
     private let method: Application.Method
 
     /// Initializes a new instance of `VaporSpecRunner`.

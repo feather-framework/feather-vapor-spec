@@ -1,6 +1,13 @@
+//
+//  HTTPBody+Collect.swift
+//  feather-vapor-spec
+//
+//  Created by Binary Birds on 2026. 01. 21..
+
 import OpenAPIRuntime
 import Vapor
 
+/// Vapor-specific collection helpers for `HTTPBody`.
 extension HTTPBody {
 
     /// Collects the body data asynchronously and returns it as a `ByteBuffer`.

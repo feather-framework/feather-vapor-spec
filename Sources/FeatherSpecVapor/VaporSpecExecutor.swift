@@ -1,15 +1,23 @@
-import OpenAPIRuntime
-import HTTPTypes
+//
+//  VaporSpecExecutor.swift
+//  feather-vapor-spec
+//
+//  Created by Binary Birds on 2026. 01. 21..
+
 import FeatherSpec
+import HTTPTypes
+import OpenAPIRuntime
 import XCTVapor
 
-/// A struct that conforms to the `SpecExecutor` protocol and executes HTTP requests using Vapor.
+/// A `SpecExecutor` implementation that executes HTTP requests using Vapor.
 ///
-/// This executor uses an `XCTApplicationTester` to perform the actual HTTP request execution and handles
-/// the response and body transformations.
+/// This executor uses `XCTApplicationTester` to execute requests and adapts Vapor responses
+/// into `HTTPResponse` and `HTTPBody` for expectation evaluation.
 struct VaporSpecExecutor: SpecExecutor {
 
     /// The client responsible for executing HTTP requests.
+    ///
+    /// This is provided by `XCTVapor` for test execution.
     let client: XCTApplicationTester
 
     /// Executes an HTTP request with the provided request and body.
@@ -42,7 +50,7 @@ struct VaporSpecExecutor: SpecExecutor {
         let headers = HTTPHeaders(req.headerFields.toHTTPHeaders())
         let buffer = try await body.collect()
 
-        var result: (response: HTTPResponse, body: HTTPBody)!
+        var result: (response: HTTPResponse, body: HTTPBody)?
 
         try await client.test(
             method,
@@ -61,6 +69,9 @@ struct VaporSpecExecutor: SpecExecutor {
             result = (response: response, body: body)
         }
 
+        guard let result else {
+            throw Spec.Failure.status(.internalServerError)
+        }
         return result
     }
 }
